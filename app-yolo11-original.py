@@ -1,12 +1,9 @@
 import gradio as gr
-import torch
-from PIL import Image, ImageDraw
-import numpy as np
 from ultralytics import YOLO
 import cv2
 
 # Now load the model
-model = YOLO('MU_Model_V4/MU_YOLO5u_100epochS_V4.pt')
+model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 # Define a function for object detection
 def detect_objects(source):
@@ -20,7 +17,7 @@ def detect_objects(source):
 with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column():
-            input_img = gr.Image(label="Input", sources="webcam")
+            input_img = gr.Image(label="Input", sources=["webcam" , "upload"])
         with gr.Column():
             output_img = gr.Image(label="Output")
 
