@@ -8,7 +8,7 @@ save = False
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = YOLO("MU_50epochOBB11s_V1.2.pt")
+model = YOLO("MU_Model_V4/MU_50epochOBB11s_V1.2.pt")
 model = model.to(device)
 
 import cv2
@@ -16,7 +16,7 @@ from ultralytics import YOLO
 
 # Define path to video file
 # source = "C:/Users/supak/Downloads/parking_CCTV_mock_car_move_1080.mp4"
-source = "parking_video_case10.mp4"
+source = "source-parking.mp4"
 
 # Optional: Define output video parameters (adjust as desired)
 output_filename = "test.mp4"
@@ -68,7 +68,7 @@ for results in model(source, stream=True):  # generator of Results objects
     print(obb_conf_list)
     
     print("-" * 40)  # Separator for each result
-    results.show()  # display to screen
+    # results.show()  # display to screen
 
     # # Display the processed frame
     # cv2.imshow('Processed Frame', frame)

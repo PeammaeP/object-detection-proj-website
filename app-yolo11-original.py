@@ -50,15 +50,16 @@ def detect_objects(source):
 
     return annotated_frame, detection_text
 
-
 # Define the Gradio interface
 with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column():
-            input_img = gr.Image(label="Input", sources=["webcam", "upload"])
+            input_img = gr.Image(label="Open Your Webcam", sources=["webcam"])
+            upload_img = gr.Image(label="Upload Your Image", sources=["upload"])
 
         with gr.Column():
             output_img = gr.Image(label="Detected Image")
+            output_upload_img = gr.Image(label="Upload Image Output")
             detection_output = gr.Textbox(label="Detection Details", lines=10)
 
     # Bind the detection function to the input image
@@ -69,6 +70,13 @@ with gr.Blocks() as demo:
         time_limit=0.1,
         stream_every=0.05,
         concurrency_limit=60
+    )
+
+    upload_img_button = gr.Button(label="Upload Image")
+    upload_img_button.click(
+        detect_objects,
+        inputs=upload_img,
+        outputs=[output_upload_img , detection_output],
     )
 
 # Launch the interface
