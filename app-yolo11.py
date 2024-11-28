@@ -7,9 +7,6 @@ import numpy as np
 model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 def detect_objects_upload_image(image):
-    """
-    Detect objects in a single image and return annotated image with label counts
-    """
     if image is None:
         return None, {}
 

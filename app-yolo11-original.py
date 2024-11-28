@@ -1,7 +1,7 @@
 import gradio as gr
 from ultralytics import YOLO
 import cv2
-import numpy as np
+from collections import Counter
 
 # Load the model
 model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
@@ -16,6 +16,8 @@ def detect_objects(source):
 
     # Prepare detection details
     detection_info = []
+    class_counts = Counter()
+
     for box in results.boxes:
         # Get class name
         cls = results.names[int(box.cls[0])]
@@ -23,14 +25,28 @@ def detect_objects(source):
         # Get confidence
         conf = float(box.conf[0])
 
-        # Get bounding box coordinates
-        x1, y1, x2, y2 = box.xyxy[0].tolist()
+        # Track class counts
+        class_counts[cls] += 1
 
-        # Format detection info
-        detection_info.append(f"Class: {cls}, Confidence: {conf:.2f}, Bbox: ({x1:.2f}, {y1:.2f}, {x2:.2f}, {y2:.2f})")
+        # Format individual detection info
+        detection_info.append(f"Class: {cls}, Confidence: {conf:.2f}")
 
-    # Combine detection info into a single string
-    detection_text = "\n".join(detection_info) if detection_info else "No detections"
+    # Prepare class count details
+    class_count_details = []
+    total_objects = sum(class_counts.values())
+
+    for cls, count in class_counts.items():
+        percentage = (count / total_objects) * 100
+        class_count_details.append(f"{cls}: {count} ({percentage:.2f}%)")
+
+    # Combine detection details
+    detection_text = "Detections:\n"
+    if detection_info:
+        detection_text += "\nIndividual Objects:\n" + "\n".join(detection_info)
+        detection_text += "\n\nClass Counts:\n" + "\n".join(class_count_details)
+        detection_text += f"\n\nTotal Objects Detected: {total_objects}"
+    else:
+        detection_text = "No detections"
 
     return annotated_frame, detection_text
 
@@ -43,7 +59,7 @@ with gr.Blocks() as demo:
 
         with gr.Column():
             output_img = gr.Image(label="Detected Image")
-            detection_output = gr.Textbox(label="Detection Details")
+            detection_output = gr.Textbox(label="Detection Details", lines=10)
 
     # Bind the detection function to the input image
     input_img.stream(
