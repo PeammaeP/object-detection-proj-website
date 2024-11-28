@@ -123,7 +123,6 @@ def detect_objects(source, is_video=False):
 
         return annotated_frame, detection_text
 
-
 # Define the Gradio interface
 with gr.Blocks() as demo:
     with gr.Row():
