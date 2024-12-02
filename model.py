@@ -10,8 +10,7 @@ import os
 model = YOLO('MU_YOLO11_100epochS_V4.pt')
 
 # Define a function for object detection
-def detect_objects(source, is_video=False):
-    # Perform detection
+def detect_objects(source):
     results = model(source)[0]  # Get the first (and only) result
 
     # Plot the frame with detections
