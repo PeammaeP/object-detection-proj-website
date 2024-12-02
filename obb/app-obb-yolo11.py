@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 # Load YOLO model
-model = YOLO('MU_Model_V4/MU_50epochOBB11s_V1.2.pt')
+model = YOLO('../MU_Model_V4/MU_50epochOBB11s_V1.2.pt')
 
 def safe_detect_objects(input_data, is_video=False):
     """

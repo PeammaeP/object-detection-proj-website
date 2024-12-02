@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import numpy as np
 
 # Load YOLO model
-model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
+model = YOLO('../MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 def detect_objects_upload_image(image):
     if image is None:

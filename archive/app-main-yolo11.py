@@ -7,7 +7,7 @@ import tempfile
 import os
 
 # Load the model
-model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
+model = YOLO('../MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 
 # Define a function for object detection

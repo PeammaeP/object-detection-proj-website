@@ -5,7 +5,7 @@ import numpy as np
 from collections import Counter
 
 # Load the model
-model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
+model = YOLO('../MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 
 def detect_video_objects(video):
