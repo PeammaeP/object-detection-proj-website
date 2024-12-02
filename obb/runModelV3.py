@@ -8,7 +8,7 @@ save = False
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = YOLO("MU_Model_V4/MU_50epochOBB11s_V1.2.pt")
+model = YOLO("../MU_Model_V4/MU_50epochOBB11s_V1.2.pt")
 model = model.to(device)
 
 import cv2
