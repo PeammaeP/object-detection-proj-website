@@ -11,7 +11,7 @@ model = YOLO('MU_Model_V4/MU_YOLO11_100epochS_V4.pt')
 
 
 # Define a function for object detection
-def detect_objects(source, is_video=False):
+def detect_objects(source):
     # If it's a video path, process the video
     if is_video:
         # Create a temporary output directory for frames
@@ -129,12 +129,10 @@ with gr.Blocks() as demo:
         with gr.Column():
             input_img = gr.Image(label="Open Your Webcam", sources=["webcam"])
             upload_img = gr.Image(label="Upload Your Image", sources=["upload"])
-            upload_video = gr.Video(label="Upload Your Video", sources=["upload"])
 
         with gr.Column():
             output_img = gr.Image(label="Detected Webcam Image")
             output_upload_img = gr.Image(label="Image Output")
-            output_upload_video = gr.Gallery(label="Video Frames Output", columns=3, rows=3, height="auto")
             detection_output = gr.Textbox(label="Detection Details", lines=10)
 
     # Webcam detection
