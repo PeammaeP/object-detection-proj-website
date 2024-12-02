@@ -82,6 +82,3 @@ with gr.Blocks() as demo:
         inputs=upload_img,
         outputs=[output_upload_img, detection_output],
     )
-
-# Launch the interface
-demo.launch()
